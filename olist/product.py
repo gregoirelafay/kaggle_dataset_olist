@@ -23,7 +23,6 @@ class Product:
 
         products = self.data['products']
 
-        # (optional) convert name to english
         en_category = self.data['product_category_name_translation']
         df = products.merge(en_category, on='product_category_name')
         df.drop(['product_category_name'], axis=1, inplace=True)

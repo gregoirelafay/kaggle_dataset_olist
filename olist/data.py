@@ -9,12 +9,9 @@ class Olist:
         Its keys should be 'sellers', 'orders', 'order_items' etc...
         Its values should be pandas.DataFrame loaded from csv files
         """
-        # Hint: Build csv_path as "absolute path" in order to call this method from anywhere.
-        # Hint2: Use __file__ as absolute path anchor to avoid displaying your username or computer-specific folder architecture.
-        # Hint3: Use os.path library to construct path independent of Unix vs. Windows specificities
 
         root_dir = os.path.dirname(os.path.dirname(__file__))
-        csv_path = os.path.join(root_dir, "data", "csv")
+        csv_path = os.path.join(root_dir, "raw_data")
 
         file_names = [f for f in os.listdir(csv_path) if f.endswith(".csv")]
 
@@ -48,9 +45,3 @@ class Olist:
         .merge(items, on="order_id", how="outer")
 
         return matching_table
-
-    def ping(self):
-        """
-        You call ping I print pong.
-        """
-        print("pong")

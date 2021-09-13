@@ -177,10 +177,16 @@ class Seller:
         # Add seller economics (revenues, profits)
         olist_monthly_fee = 80
         olist_sales_cut = 0.1
+        cumulated_it_costs = 500_000
 
         training_set['revenues'] = training_set['months_on_olist'] * olist_monthly_fee\
             + olist_sales_cut * training_set['sales']
 
-        training_set['profits'] = training_set['revenues'] - training_set['cost_of_reviews']
+        training_set['it_costs'] = cumulated_it_costs / np.sum(
+            np.sqrt(training_set["n_orders"])) * np.sqrt(
+                training_set["n_orders"])
+
+        training_set['profits'] = training_set['revenues'] - training_set[
+            'cost_of_reviews'] - training_set['it_costs']
 
         return training_set
