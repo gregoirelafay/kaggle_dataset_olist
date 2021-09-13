@@ -1,4 +1,4 @@
-*.csv
+raw_data/*.csv
 .ipynb_checkpoints/
 .virtual_documents/
 olist/__pycache__/
