@@ -2,6 +2,11 @@ from math import radians, sin, cos, asin, sqrt
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+import string
+import unidecode
+
 
 def haversine_distance(lon1, lat1, lon2, lat2):
     """
@@ -41,3 +46,26 @@ def plot_kde_plot(df, variable, dimension):
                       hue=dimension,
                       col=dimension)
     g.map(sns.kdeplot, variable)
+
+
+def clean(text):
+
+    for punctuation in string.punctuation:
+        text = text.replace(punctuation, ' ')  # Remove Punctuation
+
+    lowercased = text.lower()  # Lower Case
+
+    unaccented_string = unidecode.unidecode(lowercased)  # remove accents
+
+    tokenized = word_tokenize(unaccented_string)  # Tokenize
+
+    words_only = [word for word in tokenized
+                  if word.isalpha()]  # Remove numbers
+
+    stop_words = set(stopwords.words('portuguese'))  # Make stopword list
+
+    without_stopwords = [
+        word for word in words_only if not word in stop_words
+    ]  # Remove Stop Words
+
+    return " ".join(without_stopwords)
